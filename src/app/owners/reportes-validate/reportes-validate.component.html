@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+<body class="w3-light-grey">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:1;width:282px; margin-top: -107px" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col">
+      <img id="imagenDeMenu" src="https://media.istockphoto.com/vectors/flat-police-badge-icon-vector-id501279457?k=6&m=501279457&s=612x612&w=0&h=xuDxPizjmKQIKFZ4HuQqJ3afFJNdNJjhW4avEtOKgIk=" class="w3-circle w3-margin-right" style="width:250px;margin-top:-70px;">
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Menu</h5>
+  </div>
+  <div class="w3-container" >
+    <ul>
+    <li>
+      <a href="/welcome" style="width:244px; height:60px;" class="active w3-bar-item w3-button w3-blue" >
+        <div style="margin-top:-8px;">
+          <i class="material-icons left">notifications_active</i><span class="w3-tag w3-red w3-right w3-margin-right">{{reportes ? reportes.length : ''}}</span>Notificación
+          </div>
+        </a>
+     </li>  
+    <li>
+      <a href="/monitoreo" style="width:244px; height:60px;" class="active w3-bar-item w3-button">
+      <div style="margin-top:-8px">
+        <i class="material-icons left">equalizer</i>Monitoreo
+      </div>
+      </a>
+    </li>  
+    <li>
+      <a href="/filtro/avanzado" style="width:244px; height:60px;" class="waves-effect active w3-bar-item w3-button">
+        <div style="margin-top:-8px">
+        <i class="material-icons left">search</i>Filtro avanzado
+        </div>
+      </a>
+    </li>
+    </ul>
+  </div>
+  <hr>
+    <div class="w3-container" >
+      <ul>
+        <li>
+      <a href="/login" style="width:244px; height:60px;" class="waves-effect active w3-bar-item w3-button">
+      <div style="margin-top:-8px">
+      <i class="material-icons left">exit_to_app</i>Cerrar sesiòn
+       </div>
+    </a>
+    </li>
+    </ul>
+     </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:280px;margin-top:43px;">
+
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3">
+      <div class="w3-container w3-orange" style="height:95px;">
+        <div class="w3-left">
+          <h2 id="cl"> Notificación  <i class="fa fa-comment fa-2x"></i></h2></div>
+        <div class="w3-right">
+        <h1 id="cl">{{reportes ? reportes.length : ''}}</h1>
+        </div>
+        <div class="w3-clear"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white" id="tabla">  
+        <div *ngIf='reportes == null '>
+    <div class="col s12 m5">
+      <div class="card-panel teal">
+        <span class="white-text">Actualmente no tiene reportes para revisar
+        </span>
+      </div>
+    </div>
+  </div>
+      <div *ngIf='reportes ? reportes.length : a > 0'>        
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">Delito</th>
+            <th scope="col">Tipo de delito</th>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+         <!-- <tr>
+            <td>1</td>
+            <td>Delincuente juvenil</td>
+            <td>Asalto transeunte</td>
+            <td>Sapotal parque 6</td>
+            <td>10/03/12</td>
+          </tr>-->
+          <tr *ngFor="let reporte of reportes; let i = index">
+            <td *ngIf='reporte.estado == "pendiente"'>{{i+1}}</td>
+            <td *ngIf='reporte.estado == "pendiente"' class="ownerFullName"><a routerLink="/reportes/{{reporte.id}}" routerLinkActive="active" (click)="onSelect(reporte)">{{reporte.delito}} </a></td>
+            <td *ngIf='reporte.estado == "pendiente"'>{{reporte.tipo_delito}}</td>
+            <td *ngIf='reporte.estado == "pendiente"'>{{reporte.ubicacion}}</td>
+            <td *ngIf='reporte.estado == "pendiente"'>{{reporte.fecha_creacion}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+  </div>
+  <button class="w3-button w3-dark-grey">Siguiente  <i class="fa fa-arrow-right"></i></button>
+</div>
+  <hr>
+  <br>
+ 
+ <div id="id01" class="w3-modal">
+ <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+  <header class="w3-container w3-grey" id="cabezera"> 
+   <span onclick="document.getElementById('id01').style.display='none'" 
+   class="w3-button w3-grey w3-xlarge w3-display-topright">&times;</span>
+   <h2 id="reportetxt">Reporte</h2>
+  </header>
+
+  <div class="w3-bar w3-border-bottom">
+   <button id="menu" class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Detalles')">Detalles</button>
+   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Imagen')">Imagen</button>
+   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Ubicación');obtenerGeolocaliozacion()">Ubicación</button>
+  </div>
+
+  <div id="Detalles" class="w3-container city">
+   <br>
+   <h1>Detalles</h1> 
+   <br>
+   <table class="w3-table w3-white">
+    <tr>
+      <th>Delito:</th>
+      <td>{{report.delito}}</td>
+    </tr>
+     <tr>
+      <th>Tipo de delito:</th>
+      <td>{{report.tipo_delito}}</td>
+    </tr>
+     <tr>
+      <th>Ubicación:</th>
+      <td>{{report.ubicacion}}</td>
+    </tr> <tr>
+      <th>Descripción del delito:</th>
+      <td>{{report.descripcion_delito}}</td>
+    </tr> <tr>
+      <th>Descripción del delincuente:</th>
+      <td>{{report.descripcion_delincuente}}</td>
+    </tr> <tr>
+      <th>Fecha publicada:</th>
+      <td>{{report.fecha_creacion}}</td>
+    </tr>
+  </table>
+  <br>
+  </div>
+
+  <div id="Imagen" class="w3-container city">
+   <br>
+   <h1>Imagen</h1>
+   <br>
+   <p>Criminal capturado por mi distrito.</p>
+   <div class="w3-row-padding">
+  <div class="w3-container w3-third">
+    <img src="https://www.cooperativa.cl/noticias/site/artic/20180502/imag/foto_0000000120180502192304.jpeg" style="width:100%;height:100%;margin-left:270px;" onclick="onClick(this)" class="w3-hover-opacity"
+    />
+  </div>
+</div>
+<br>
+  </div>
+
+  <div id="Ubicación" class="w3-container city">
+   <br>
+   <h1>Ubicación</h1>
+   <input name="lat" id="lat" style="display: none" value="{{report.latitud}}">
+   <input name="lng" id="lng" style="display: none" value="{{report.longitud}}">
+   <br>
+   <button id="boton" class="btn" onClick="obtenerGeolocaliozacion()">Visualizar</button>
+   <br>
+   <br>
+       <div id="map"></div>
+  </div>
+  <div class="w3-container w3-light-grey w3-padding">
+   <button class="w3-button w3-right w3-red w3-border" 
+   onclick="document.getElementById('id01').style.display='none'" (click)="RechazarReporte()">Rechazar</button>
+  <button class="w3-button w3-left w3-green w3-border" id="botonAprovado" type="button" (click)="AprobarReporte()">Aprobar</button>
+  </div>
+ </div>
+</div>
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-animate-zoom">
+    <img id="img01" style="width:100%">
+  </div>
+</div>
+  <!-- Alertas de reportas aprobados y rechazados -->
+<button id="btnAprovar" onClick="valAprobado()"  style='display:none;'>Botón 2</button>
+<button id="btnRechazar" onClick="valEliminado()"  style='display:none;'>Botón 2</button>
+<button id="piratea2" onClick="Confimacion()"  style='display:none;'>Botón 2</button>
+
+  <!-- End page content -->
+   <footer id="foter">
+  <div class="w3-container w3-dark-grey w3-padding-32">
+    <div class="w3-row">
+      <div class="w3-container w3-third">
+        <h5 class="w3-bottombar w3-border-green">Autor</h5>
+        <p>Honda System @ 2018</p>
+      </div>
+    </div>
+  </div>
+  </footer>
+</div>
+</body>
+</html>

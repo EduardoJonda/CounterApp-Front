@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+<body class="w3-light-grey">
+<!-- Top container --><!--
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4" id="tops">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="openNav()"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">Logo</span>
+</div>-->
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:1;width:282px; margin-top: -107px" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col">
+      <img id="imagenDeMenu" src="https://media.istockphoto.com/vectors/flat-police-badge-icon-vector-id501279457?k=6&m=501279457&s=612x612&w=0&h=xuDxPizjmKQIKFZ4HuQqJ3afFJNdNJjhW4avEtOKgIk=" class="w3-circle w3-margin-right" style="width:250px">
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Menu</h5>
+  </div>
+  <div class="w3-container" >
+    <ul>
+    <li>
+      <a href="/welcome" style="width:244px; height:60px;" class="active w3-bar-item w3-button" >
+        <div style="margin-top:-8px">
+          <i class="material-icons left">notifications_active</i><span class="w3-tag w3-red w3-right w3-margin-right">{{reportes ? reportes.length : ''}}</span>Notificación
+          </div>
+        </a>
+     </li>  
+    <li>
+      <a href="/monitoreo" style="width:244px; height:60px;" class="active w3-bar-item w3-button w3-blue">
+      <div style="margin-top:-8px">
+        <i class="material-icons left">equalizer</i>Monitoreo
+      </div>
+      </a>
+    </li>  
+    <li>
+      <a href="/filtro/avanzado" style="width:244px; height:60px;" class="waves-effect active w3-bar-item w3-button">
+        <div style="margin-top:-8px">
+        <i class="material-icons left">search</i>Filtro avanzado
+        </div>
+      </a>
+    </li>
+    </ul>
+  </div>
+  <hr>
+    <div class="w3-container" >
+      <ul>
+        <li>
+      <a href="/" style="width:244px; height:60px;" class="waves-effect active w3-bar-item w3-button">
+      <div style="margin-top:-8px">
+      <i class="material-icons left">exit_to_app</i>Cerrar sesiòn
+       </div>
+    </a>
+    </li>
+    </ul>
+     </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:280px;margin-top:43px;">
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="hoverable">
+      <div class="w3-container w3-green">
+        <div class="w3-left">
+          <h3>&#160; Región : {{mensaje}}</h3>
+        </div>
+        <div class="w3-right">
+        <h4 id="cl"> Monitoreo &#160;  <i class="fa fa-line-chart fa-2x"></i></h4>
+        </div>
+        <div class="w3-clear"></div>
+      </div>
+    </div>
+  </div>
+  <div id="content" #content>
+  <div class="w3-panel w3-white" >
+  	<br>
+  	<div class="col-md-8 z-depth-4" style="margin-left: 250px">
+  		<br>
+  		    <h4>&#160;&#160;&#160;&#160;Reportes publicados en la región de {{mensaje}}</h4>
+  		     	<hr>
+  	<div style="display: block">
+		  <canvas baseChart
+		              [data]="doughnutChartData"
+		              [labels]="doughnutChartLabels"
+		              [chartType]="doughnutChartType"
+		              (chartHover)="chartHovered($event)"
+		              (chartClick)="chartClicked($event)">              	
+		   </canvas>
+		    <br><br>
+     </div>
+
+</div>
+  	<div class="col-md-6 ">
+</div>
+  			<div class="col-md-8" style="margin-bottom: 10px; margin-left: 250px">
+  				 <br><br>
+		    <table class="table table-responsive table-condensed">
+		      <tr>
+		        <th *ngFor="let label of lineChartLabels">{{label}}</th>
+		      </tr>
+		      <tr *ngFor="let d of lineChartData">
+		        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+		      </tr>
+		    </table>
+		    <button class="btn btn-primary" style="display: none" (click)="randomize()">Ok</button>
+		     <br> <br>
+		  </div>
+             <br>
+		  <div class="col-md-8 z-depth-4" style="margin-left: 250px">
+		  	<br> 
+		  	<h4>&#160;&#160;Frecuencia de los reportes publicados en la región de {{mensaje}}</h4>
+		  	<hr>
+            <label for="recipient-name" class="form-label w3-left">Año:</label>
+            <select class="form-control w3-right">
+          <option>2018</option>
+          <option>2017</option>
+            </select>
+		  
+		    <div style="display: block;">
+		    <canvas baseChart width="500" height="250"
+		                [datasets]="lineChartData"
+		                [labels]="lineChartLabels"
+		                [options]="lineChartOptions"
+		                [colors]="lineChartColors"
+		                [legend]="lineChartLegend"
+		                [chartType]="lineChartType"
+		                (chartHover)="chartHovered($event)"
+		                (chartClick)="chartClicked($event)"></canvas>
+		    </div>
+		    <br>
+		  </div>
+  </div>
+  </div>
+    <div class="w3-panel w3-white">
+    	<button onClick="generatePDF()" class="btn btn-primary w3-right">Descargar gráfico</button>
+    </div>
+   <footer id="foter">
+  <div class="w3-container w3-dark-grey w3-padding-32">
+    <div class="w3-row">
+      <div class="w3-container w3-third">
+        <h5 class="w3-bottombar w3-border-green">Autor</h5>
+        <p>Honda System @ 2018</p>
+      </div>
+    </div>
+  </div>
+  </footer>
+</div> 
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!--
+  ~ /*
+  ~  * Copyright 2016-2017 the original author or authors.
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *      http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="container-fluid" id="boddy">
+  <div class="container xd-container">
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<button id="btnLoginFailded" onClick="loginfailed()">Botón 1</button>
+<button id="btnLoginSucces" onClick="loginsucces()">Botón 1</button>
+<button onClick="mensaje2()"  style='display:none;'>Botón 2</button>
+<button id="piratea2" onClick="Confimacion()">Botón 3</button>
+<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Tabbed Modal</button>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<div id="id01" class="w3-modal">
+ <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+  <header class="w3-container w3-blue" id="cabezera"> 
+   <span onclick="document.getElementById('id01').style.display='none'" 
+   class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+   <h2 id="reportetxt">Reporte</h2>
+  </header>
+
+  <div class="w3-bar w3-border-bottom">
+   <button id="menu" class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Detalles')">Detalles</button>
+   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Imagen')">Imagen</button>
+   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Ubicación')">Ubicación</button>
+  </div>
+
+  <div id="Detalles" class="w3-container city">
+   <br>
+   <h1>Detalles</h1> 
+   <br>
+   <table class="w3-table w3-white">
+    <tr>
+      <th>Delito:</th>
+      <td>Jill</td>
+    </tr>
+     <tr>
+      <th>Tipo de delito:</th>
+      <td>Jill</td>
+    </tr>
+     <tr>
+      <th>Ubicación:</th>
+      <td>Jill</td>
+    </tr> <tr>
+      <th>Descripción del delito:</th>
+      <td>Jill</td>
+    </tr> <tr>
+      <th>Descripción del delincuente:</th>
+      <td>Jill</td>
+    </tr> <tr>
+      <th>Fecha publicada:</th>
+      <td>Jill</td>
+    </tr>
+  </table>
+  <br>
+  </div>
+
+  <div id="Imagen" class="w3-container city">
+   <br>
+   <h1>Imagen</h1>
+   <br>
+   <p>Criminal capturado por mi distrito.</p>
+   <div class="w3-row-padding">
+  <div class="w3-container w3-third">
+    <img src="https://www.cooperativa.cl/noticias/site/artic/20180502/imag/foto_0000000120180502192304.jpeg" style="width:100%;cursor:pointer" 
+    onclick="onClick(this)" class="w3-hover-opacity">
+  </div>
+</div>
+  </div>
+
+  <div id="Ubicación" class="w3-container city">
+   <br>
+   <h1>Ubicación</h1>
+   <br>
+   <button id="boton" class="btn">Ubicarme</button>
+   <div id="map"></div>
+   <br>
+  </div>
+
+  <div class="w3-container w3-light-grey w3-padding">
+   <button class="w3-button w3-right w3-white w3-border" 
+   onclick="document.getElementById('id01').style.display='none'">Close</button>
+  </div>
+ </div>
+</div>
+
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-animate-zoom">
+    <img id="img01" style="width:100%">
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-12 text-center">
+  
+    <div class="row">
+      <div id="Contenedor">
+          <h1 id="text">Login</h1>
+         <div class="Icon">
+                    <!--Icono de usuario-->
+                   <span class="glyphicon glyphicon-user"></span>
+                 </div>
+<div class="ContentForm">
+      <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm" class="col s12">
+         <div class="form-group" hidden="true">
+        <input type="text" hidden="true" class="form-control" id="id" [(ngModel)]="login.id" name="id" value="1" />
+      </div>
+      <div class="row">
+        <div class="input-group input-group-lg input-field col s12">
+         <i class="material-icons prefix">account_circle</i>
+          <input type="email" class="white-text text-darken-2 validate" name="address" #address="ngModel" id="address" [(ngModel)]="login.address" required/>
+          <label for="address" class="white-text">Correo</label>
+        </div>
+         <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="address.valid" [class.glyphicon-remove]="!address.valid" aria-hidden="true"></span>
+          <span class="help-block" *ngIf="address.dirty && address.hasError('required')">Ingrese su correo</span>
+        <br>
+        <div class="input-group input-group-lg input-field col s12">
+          <i class="material-icons prefix">enhanced_encryption</i>
+          <input type="password" [(ngModel)]="login.password" id="password" name="password" class="white-text validate" aria-describedby="sizing-addon1" required #password="ngModel"/>
+           <label for="password" class="white-text">Password</label>
+        </div>
+         </div>
+         <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="password.valid" [class.glyphicon-remove]="!password.valid" aria-hidden="true"></span>
+          <span class="help-block" *ngIf="password.dirty && password.hasError('required')">Ingrese su contraseña</span>
+        <button class="waves-effect waves-light btn-large orange lighten-2" id="IngresoLog" type="submit" [disabled]="!loginForm.valid">Iniciar sesiòn</button><br>
+        <div class="opcioncontra"><a href="" id="text2">Olvidaste tu contraseña?</a></div>
+      </form>
+     </div> 
+     </div>
+    </div>
+  </div>
+  </div>

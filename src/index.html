@@ -1,0 +1,428 @@
+<!doctype html>
+<!--
+  ~ /*
+  ~  * Copyright 2016-2017 the original author or authors.
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *      http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  -->
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Counter</title>
+  <base href="/counter">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+ <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+                 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+<script type="text/javascript">
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+function obtenerGeolocaliozacion() {
+    var boton = document.getElementById("boton");
+   // cuando se pulsa en el enlace
+   boton.onclick = function(e) {
+    // evitamos la acción por defecto
+    e.preventDefault();
+    // creamos una etiqueta script
+    var s = document.createElement("script");
+    // indicamos en el atributo src el fichero que quieres cargar
+    s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBaGUvvbgP6ga0qir83A3O3LqsDb3kgFd8&callback=initMap";
+    // lo añadimos al documento (y se ejecuta automaticamente)
+    document.querySelector("body").appendChild(s);
+    // borra el script del documento (para evitar basura si se ejecuta multiples veces)
+    s.remove();
+}
+}
+function loginfailed() {
+swal ( {
+  title: "Credencial invalido" ,  
+  text: "Ingrese una credencial valida para iniciar sesión" ,  
+  icon: "error",
+  timer: 1800
+  })
+}
+
+function loginsucces() {
+swal ( {
+  title: "Bienvenido a Counter App" ,  
+  text: "" ,  
+  icon: "success",
+  timer: 1500
+  })
+}
+
+function valAprobado() {
+
+swal ( {
+  title: "Reporte aprobado" ,  
+  text: "El reporte seleccionado fue aprobado",  
+  icon: "success", 
+  timer: 2000
+  })
+}
+
+function valEliminado() {
+
+swal ( {
+  title: "Reporte eliminado" ,  
+  text: "El reporte seleccionado fue eliminado",  
+  icon: "success", 
+  timer: 2000
+  })
+}
+
+function Confimacion() {
+  swal({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(function() {
+       return "BUENO";
+  })
+}
+
+function prueba() {
+  $(".swa-confirm").submit(function (e) {
+    e.preventDefault();
+    swal({
+        title: "prueba",
+        text: "Probando de alguna manera",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#cc3f44",
+        confirmButtonText: "OK",
+        closeOnConfirm: false,
+        html: false
+    }, function(){
+        $(".swa-confirm").off("submit").submit();
+    });
+});
+}
+
+function mensaje3(){
+  swal({
+    title: 'Yeeeaaaah!!!',
+    text: '',
+    icon: 'https://wasabiBD.github.io/test-repo/dia2/images/feito.png',
+    imageWidth: 164,
+    imageHeight: 205,
+    padding: 10,
+    animation: true,
+  });
+}
+
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+// modalbox
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.remove("w3-light-grey");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.classList.add("w3-light-grey");
+}
+
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+}
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+
+$('#exampleModal2').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+
+</script>
+<!-- 
+<script>
+    var marker;          //variable del marcador
+    var coords = {};    //coordenadas obtenidas con la geolocalización
+    //Funcion principal
+    initMap = function () {
+    //usamos la API para geolocalizar el usuario
+    navigator.geolocation.getCurrentPosition(
+      function (position){
+        coords =  {
+          lng: position.coords.longitude,
+          lat: position.coords.latitude
+        };
+        setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
+      },function(error){console.log(error);});
+    }
+    function setMapa (coords) {   
+    //Se crea una nueva instancia del objeto mapa
+    var map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 13,
+      center:new google.maps.LatLng(coords.lat,coords.lng),
+    });
+    //Creamos el marcador en el mapa con sus propiedades -12.044167, -76.952900
+    //position pondremos las mismas coordenas que obtuvimos en la geolocalización
+    marker = new google.maps.Marker({
+      map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        title: 'Aqui es',
+        position: new google.maps.LatLng(coords.lat,coords.lng),
+      });
+      //agregamos un evento al marcador junto con la funcion callback al igual que el evento dragend que indica 
+      //cuando el usuario suelta el marcador
+      marker.addListener('click', toggleBounce);
+      
+      marker.addListener( 'dragend', function (event) {
+        //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
+        document.getElementById("coords").value = this.getPosition().lat()+","+ this.getPosition().lng();
+        document.getElementById("lat").value = this.getPosition().lat();
+        document.getElementById("long").value = this.getPosition().lng();
+      });
+    }
+    //callback al hacer clic en el marcador lo que hace es quitar y poner la animacion BOUNCE
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    // Carga de la libreria de google maps 
+  </script>
+<script>
+// seleccionamos el enlace 
+var boton = document.getElementById("boton"); 
+// cuando se pulsa en el enlace
+boton.onclick = function(e) {
+    // evitamos la acción por defecto
+    e.preventDefault();
+    // creamos una etiqueta script
+    var s = document.createElement("script");
+    // indicamos en el atributo src el fichero que quieres cargar
+    //s.src = "https://maps.googleapis.com/maps/api/js?callback=initMap"; 
+    s.src = "https://maps.googleapis.com/maps/api/js?callback=initMap";
+    // lo añadimos al documento (y se ejecuta automaticamente)
+    document.querySelector("body").appendChild(s);
+    // borra el script del documento (para evitar basura si se ejecuta multiples veces)
+    s.remove();
+}
+</script>-->
+<script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<app-root>
+  <center>
+<br><br><br><h2>Cargando...</h2><br><br><br>
+
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </center>
+</app-root>
+  <script>
+// funcion para Cargar Provincias al campo <select>
+function cargar_provincias(dep_param) {
+ var arrayl = ["Seleccione un distrito", "Santa Madgalena", "Ate", "Santa Anita", "Huarochiri", "Vitarte"];
+ var arrayC = ["Seleccione un distrito", "Camacho", "Javier prado", "La positiva", "Barranco", "Estacion flores"];
+
+ // Ordena el Array Alfabeticamente, es muy facil ;)):
+ // arrayl.sort();
+ // arrayC.sort();
+
+ if (dep_param == "Lima") {
+
+var sel = document.getElementById("distrito");
+// limpia
+for (paso = 0; paso < 10; paso++) {
+    sel.remove(sel.options);
+};
+// agrega las opciones
+  addOptions("distrito", arrayl);
+ } else if (dep_param == "Camacho") {
+
+var sel = document.getElementById("distrito");
+// limpia
+for (paso = 0; paso < 10; paso++) {
+    sel.remove(sel.options);
+};
+// agrega las opciones
+   addOptions("distrito", arrayC);
+ } else {
+
+ }
+};
+
+// Rutina para agregar opciones a un <select>
+function addOptions(domElement, array) {
+ var select = document.getElementsByName(domElement)[0];
+
+ for (value in array) {
+  var option = document.createElement("option");
+  option.value = array[value];
+  option.text = array[value];
+  console.log(option);
+  select.add(option);
+ }
+}
+
+function habilitarCombo(valor){
+if(valor=="Lima"){
+
+document.getElementById("distrito").disabled = false;
+cargar_provincias(valor);
+} else {
+  cargar_provincias(valor);
+document.getElementById("distrito").disabled = false;
+}
+}
+
+function habilitarText(valor){
+if(valor=="Otrosssss"){
+
+document.getElementById("adition").style.display='block';
+cargar_provincias(valor);
+} else {
+var item = document.getElementById("distrito2");
+item.value = valor;
+}
+}
+
+function generatePDF() {
+  kendo.drawing.drawDOM($("#content")).then(function(group) {
+    kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf");
+  });
+}
+
+</script>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      //        lat: -12.043654,
+      //        lng:  -76.952839 
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+        function initMap() {
+          console.log(" LAT " + parseFloat(document.getElementById("lat").value));
+          console.log(" LNG " + parseFloat(document.getElementById("lng").value));
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 15
+        });
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat:  parseFloat(document.getElementById("lat").value),
+              lng:  parseFloat(document.getElementById("lng").value)
+          };
+        
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+         //  document.getElementById("lat").value = pos['lat'];
+         //   document.getElementById("lng").value = pos['lng'];
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+    
+    </script>
+</body>
+</html>
